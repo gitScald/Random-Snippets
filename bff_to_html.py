@@ -6,20 +6,19 @@ HEADER = '''<!DOCTYPE html>
 
 <head>
     <meta charset="UTF-8"/>
-    <title>Hiding the Pain | Harold's Emporium</title>
+    <title>{0}</title>
     <style>
-        p {
+        p {{
             margin: 0px;
             padding: 0px;
-        }
+        }}
     </style>
 </head>
 
 <body>
     <form action="">'''
 
-FOOTER = '''    </form>
-</body>
+FOOTER = '''</body>
 
 </html>
 '''
@@ -51,9 +50,10 @@ if __name__ == '__main__':
         line_index = line_index + 1
 
     with open(args.file + ".html", 'w') as file:
-        file.write(HEADER)
+        file.write(HEADER.format(args.file))
         for section_id in range(0, len(sections)):
-            file.write('\n        <a href="#section{0}">{1}</a><br>'.format(section_id, sections[section_id]))
+            file.write('\n        <a href="#section{0}">{1}</a>'.format(section_id, sections[section_id]))
+        file.write('\n    </form>\n')
         for line in content:
             file.write('            ' + line + '\n')
         file.write(FOOTER)
